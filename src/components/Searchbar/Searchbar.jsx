@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaSearch } from 'react-icons/fa';
 import {
   StyledForm,
   StyledHeader,
@@ -8,15 +9,15 @@ import {
 } from './Searchbar.styled';
 
 export default function Searchbar({ onSelectCategory }) {
- const onSubmit = event => {
+  const onSubmit = event => {
     event.preventDefault();
-    onSelectCategory(event.target.elements.search.value.trim());
+    onSelectCategory(event.target.elements.search.value);
   };
-  
   return (
     <StyledHeader>
       <StyledForm onSubmit={onSubmit}>
         <StyledSearchBtn type="submit">
+          <FaSearch className="FaSearch" />
           <span className="SearchForm-button-label"></span>
         </StyledSearchBtn>
 
@@ -27,11 +28,7 @@ export default function Searchbar({ onSelectCategory }) {
           autoFocus
           placeholder="Search images and photos"
         />
-
-
       </StyledForm>
-
-
     </StyledHeader>
   );
 }
