@@ -7,6 +7,8 @@ import { Modal } from './Modal/Modal';
 import Loader from './Loader/Loader';
 import { POSTS_PER_PAGE } from 'constants/constans';
 
+
+
 export const App = () => {
   const [galleryList, setGalleryList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +20,8 @@ export const App = () => {
     isOpen: false,
     modalData: null,
   });
+
+
 
   useEffect(() => {
     if (!searchTerm || !page) return;
@@ -49,6 +53,7 @@ export const App = () => {
     scrollToBottom();
   }, [galleryList.length, page]);
 
+  
   const onSelectCategory = category => {
     setSearchTerm(category);
     setPage(1);
@@ -78,12 +83,13 @@ export const App = () => {
     page >= 1 &&
     !showLoader &&
     !showError;
+  
   return (
     <div className="App">
       <Searchbar onSelectCategory={onSelectCategory} />
       {showError && (
         <div>
-          <p>Opps, some error occured... Error: {error}</p>
+          <p>Opps, some error happend... Error: {error}</p>
         </div>
       )}
       {galleryList?.length > 0 && (

@@ -3,12 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledImageGallery } from './ImageGallery.styled';
 
-const ImageGallery = ({ galleryList, onOpenModal }) => {
-  const showGalleryList = Array.isArray(galleryList) && galleryList.length > 0;
+const ImageGallery = ({ dataList, onOpenModal }) => {
+  const showGalleryList = Array.isArray(dataList) && dataList.length > 0;
   return (
     <StyledImageGallery>
       {showGalleryList &&
-        galleryList.map(item => (
+        dataList.map(item => (
           <ImageGalleryItem
             key={item.id}
             webformatURL={item.webformatURL}
