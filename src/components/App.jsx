@@ -25,13 +25,11 @@ export const App = () => {
 
   useEffect(() => {
     if (!searchTerm || !page) return;
-    const fetchGallery = async () => {
+      const fetchGallery = async () => {
       try {
         setIsLoading(true);
         const galleryList = await requestGalleryList(searchTerm, page);
-        setGalleryList(prevState =>
-          page === 1 ? galleryList.hits : [...prevState, ...galleryList.hits]
-        );
+        setGalleryList(prevState => [...prevState, ...galleryList.hits]);
         setTotalHits(galleryList.totalHits);
       } catch (error) {
         setError(error.message);
@@ -39,9 +37,17 @@ export const App = () => {
         setIsLoading(false);
       }
     };
-    fetchGallery();
-  }, [searchTerm, page, totalHits]);
-
+    if (searchTerm) {
+      fetchGallery();
+    }
+  }, [page, searchTerm]);
+ const onSelectCategory = category => {
+    if (!category) return alert('Cannot be empty');
+    setSearchTerm(category);
+    setPage(1);
+    setGalleryList([]);
+ };
+  
   useEffect(() => {
     const scrollToBottom = () => {
       const pages = window.innerHeight;
@@ -53,11 +59,7 @@ export const App = () => {
     scrollToBottom();
   }, [galleryList.length, page]);
 
-  
-  const onSelectCategory = category => {
-    setSearchTerm(category);
-    setPage(1);
-  };
+
 
   const onLoadMore = () => {
     setPage(prevState => prevState + 1);

@@ -11,7 +11,7 @@ import {
 export default function Searchbar({ onSelectCategory }) {
   const onSubmit = event => {
     event.preventDefault();
-    onSelectCategory(event.target.elements.search.value);
+    onSelectCategory(event.target.elements.search.value.trim());
   };
   return (
     <StyledHeader>
